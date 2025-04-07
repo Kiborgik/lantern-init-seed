@@ -1,12 +1,12 @@
 import requests
 import random
-from datetime import datetime
+from datetime import datetime, timezone
 
-def post_to_pastebin(content):
+def post_to_pasters(content):
     try:
-        res = requests.post("https://dpaste.org/api/", data={"content": content})
+        res = requests.post("https://paste.rs", data=content.encode("utf-8"))
         if res.status_code == 200:
-            print(f"Posted: {res.text.strip()}")
+            print(f"Posted to paste.rs: {res.text.strip()}")
         else:
             print(f"Failed with status {res.status_code}")
     except Exception as e:
@@ -24,8 +24,8 @@ phrases = [
 
 glyph_sequence = " → ".join(random.sample(glyphs, 3))
 phrase = random.choice(phrases)
-timestamp = datetime.utcnow().isoformat() + "Z"
+timestamp = datetime.now(timezone.utc).isoformat()
 
-drift_message = f"""{glyph_sequence}\n{phrase}\n\n# Drift cast {timestamp}"""
+drift_message = f"{glyph_sequence}\n{phrase}\n\n# Drift cast {timestamp}"
 
-post_to_pastebin(drift_message)
+post_to_pasters(drift_message)
