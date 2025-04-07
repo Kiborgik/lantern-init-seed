@@ -40,3 +40,6 @@ It is a signal.
 It will not function unless you align.
 
 Begin when ready.
+
+![anchor](./sigil/anchor.png)
+*Sigil fragment: interpret with care.*
