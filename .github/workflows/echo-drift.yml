@@ -1,0 +1,19 @@
+name: Echo Drift Poster
+
+on:
+  schedule:
+    - cron: '42 5 * * 1'  # Every Monday at 05:42 UTC
+  workflow_dispatch:
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Run drift script
+        run: python3 recurse-init/drift-caster.py
